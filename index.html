@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수요비 골프 모임</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        body {
+                font-family: 'Roboto', sans-serif;
+                background: linear-gradient(to right, #6a11cb, #2575fc);
+                color: #0b0c0b;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-image: url("beautiful-golf-course-landscape.jpg");
+                background-size: 100%;
+            }
+            h1 {
+                margin-top: 20px;
+                font-size: 2.5em;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            #container {
+                display: flex;
+                flex-wrap: wrap;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                padding: 20px;
+                margin: 20px;
+                width: 80%;
+                max-width: 1000px;
+            }
+            #nameInputContainer, #teamInputContainer {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin: 10px;
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            #nameInputContainer {
+                margin-right: 20px;
+            }
+            label, input, button {
+                display: block;
+                width: calc(100% - 20px); /* Adjusted width */
+                margin-bottom: 10px;
+                box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+            }
+            input {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+            }
+            button {
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background: #007BFF;
+                color: #fff;
+                cursor: pointer;
+                transition: background 0.3s;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+            button:hover:not(:disabled) {
+                background: #0056b3;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                width: 100%;
+            }
+            li {
+                background: #007BFF;
+                color: #fff;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 5px;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            #teamContainer h2 {
+                color: #fff;
+                margin-top: 0;
+            }
+            #teamContainer li {
+                display: inline;
+                margin-right: 10px;
+            }
+            #resetButton {
+                background: #dc3545;
+                width: 100%;
+            }
+            #resetNameButton {
+                background: #dc3545;
+                width: 100%;
+            }
+            #resetTeamsButton {
+                background: #dc3545;
+                width: 100%;
+            }
+            #resetButton:hover:not(:disabled) {
+                background: #c82333;
+            }
+            #resetNameButton:hover:not(:disabled) {
+                background: #c82333;
+            }
+            #resetTeamsButton:hover:not(:disabled) {
+                background: #c82333;
+            }
+            #removeNameButton { /* 추가된 부분 */
+                background: #6c757d;
+            }
+            #removeNameButton:hover {
+                background: #5a6268;
+            }
+            #removeMemberButton { /* 추가된 부분 */
+                background: #6c757d;
+            }
+            #removeMemberButton:hover {
+                background: #5a6268;
+            }
+            @media (max-width: 768px) {
+                #container {
+                    flex-direction: column;
+                }
+                #nameInputContainer, #teamInputContainer {
+                    margin-right: 0;
+                    margin-bottom: 20px;
+                }
+            }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="shuffle.js"></script>
+</head>
+<body>
+    <h1>수요비 골프 모임</h1>
+    <div id="container">
+        <div id="nameInputContainer">
+            <label for="nameInput">이름:</label>
+            <input type="text" id="nameInput" placeholder="이름을 입력하세요">
+            <button id="addNameButton">이름 추가</button>
+            <button id="removeNameButton">이름 삭제</button>
+            <p id="nameCount">총 인원 : 0</p>
+            <ul id="nameList"></ul>
+        </div>
+
+        <div id="teamInputContainer">
+            <label for="teamCountInput">몇 조를 생성할까요?</label>
+            <input type="number" id="teamCountInput" min="1" placeholder="조 개수를 입력하세요">
+            <button id="generateTeamsButton">조 생성</button>
+            <!-- <button id="removeMemberButton">팀원 삭제</button> -->
+            <div id="teamContainer"></div>
+            
+        </div>
+
+        <div>
+            <button id="resetNameButton">이름 추가 리셋</button>
+            <button id="resetTeamsButton">조 생성 리셋</button>
+            <button id="resetButton">전체리셋</button>
+        </div>
+    </div>
+</body>
+</html>
